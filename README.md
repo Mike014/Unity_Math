@@ -1,115 +1,130 @@
 # Unity Math Lab
 
-Un laboratorio didattico per apprendere i concetti fondamentali della matematica 3D in Unity attraverso script interattivi e tecniche di debug visivo.
+An educational laboratory designed to master fundamental 3D math concepts in Unity using interactive scripts and visual debugging techniques.
 
-## Panoramica
+## Overview
 
-Questo progetto è stato creato come risorsa educativa per comprendere la matematica alla base dello sviluppo di videogiochi, in particolare per quanto riguarda la **collision detection** e le operazioni vettoriali.
+This project was created as an educational resource to understand the mathematics behind game development, specifically focusing on **collision detection** and vector operations.
 
-## Requisiti
+## Requirements
 
-- **Unity**: 2022.3.62f3 (LTS) o superiore
-- **Linguaggio**: C#
+* **Unity**: 2022.3.62f3 (LTS) or higher
+* **Language**: C#
 
-## Struttura del Progetto
+## Project Structure
 
 ```
 Assets/
 ├── Scripts/
-│   ├── Bounding Box/       # Script per collision detection AABB
-│   └── Bounding Spheres/   # Script per collision detection sferico
+│   ├── Bounding Box/       # Scripts for AABB collision detection
+│   └── Bounding Spheres/   # Scripts for spherical collision detection
 └── Scenes/
-    └── SampleScene.unity   # Scena dimostrativa
+    └── SampleScene.unity   # Demo scene
+
 ```
 
-## Concetti Matematici
+## Mathematical Concepts
 
 ### Bounding Box (AABB)
 
-La cartella `Bounding Box` contiene 5 script che implementano la collision detection tramite **Axis-Aligned Bounding Box**:
+The `Bounding Box` folder contains 5 scripts implementing collision detection via **Axis-Aligned Bounding Boxes**:
 
-| Script | Descrizione |
-|--------|-------------|
-| `BoundingBox3D.cs` | Calcola le proprietà di un bounding box 3D (centro, dimensioni) |
-| `BoundingBox3DCollision.cs` | Implementa la collision detection AABB con confronto Min/Max |
-| `IntervalMinMax.cs` | Verifica se un punto è contenuto in un volume 3D |
-| `IntervalOverlap.cs` | Rileva la sovrapposizione di intervalli 1D e calcola l'intersezione |
-| `SimpleCollision.cs` | Wrapper che utilizza `Bounds.Intersects()` di Unity |
+| Script | Description |
+| --- | --- |
+| `BoundingBox3D.cs` | Calculates 3D bounding box properties (center, size) |
+| `BoundingBox3DCollision.cs` | Implements AABB collision detection using Min/Max comparison |
+| `IntervalMinMax.cs` | Checks if a point is contained within a 3D volume |
+| `IntervalOverlap.cs` | Detects 1D interval overlap and calculates intersection |
+| `SimpleCollision.cs` | Wrapper using Unity's `Bounds.Intersects()` |
 
-**Concetti chiave:**
-- Aritmetica vettoriale (addizione, sottrazione)
-- Calcolo Min/Max
-- Separating Axis Theorem (SAT)
-- Logica di sovrapposizione intervalli
+**Key Concepts:**
+
+* Vector arithmetic (addition, subtraction)
+* Min/Max calculation
+* Separating Axis Theorem (SAT)
+* Interval overlap logic
 
 ### Bounding Spheres
 
-La cartella `Bounding Spheres` contiene 5 script per la collision detection basata su sfere:
+The `Bounding Spheres` folder contains 5 scripts for sphere-based collision detection:
 
-| Script | Descrizione |
-|--------|-------------|
-| `Sphere.cs` | Calcolo della distanza tra due punti |
-| `DistanceBetweenTwoPositions.cs` | Dimostra il calcolo della distanza (manuale e con Unity) |
-| `FindRadius.cs` | Calcola il raggio di una sfera dal centro e punti sulla superficie |
-| `IsInsideOutside.cs` | Verifica se un punto è dentro o fuori una sfera |
-| `SphereVSSphere.cs` | Template per collision sfera-sfera |
+| Script | Description |
+| --- | --- |
+| `Sphere.cs` | Calculates distance between two points |
+| `DistanceBetweenTwoPositions.cs` | Demonstrates distance calculation (manual vs. Unity) |
+| `FindRadius.cs` | Calculates sphere radius from center and surface points |
+| `IsInsideOutside.cs` | Checks if a point is inside or outside a sphere |
+| `SphereVSSphere.cs` | Template for sphere-sphere collision |
 
-**Concetti chiave:**
-- Formula della distanza 3D (distanza euclidea)
-- Teorema di Pitagora esteso a 3 dimensioni
-- Calcolo della magnitudine di un vettore
-- Test punto-in-sfera
+**Key Concepts:**
 
-## Formule Matematiche
+* 3D Distance Formula (Euclidean distance)
+* Pythagorean Theorem extended to 3 dimensions
+* Vector Magnitude calculation
+* Point-in-sphere test
 
-### Distanza tra due punti
+## Mathematical Formulas
+
+### Distance between two points
+
 ```
 d = √[(x₂-x₁)² + (y₂-y₁)² + (z₂-z₁)²]
+
 ```
 
-### Collision AABB
-Due bounding box collidono se si sovrappongono su tutti e tre gli assi:
-```
-collisione = (A.min.x ≤ B.max.x && A.max.x ≥ B.min.x) &&
-             (A.min.y ≤ B.max.y && A.max.y ≥ B.min.y) &&
-             (A.min.z ≤ B.max.z && A.max.z ≥ B.min.z)
-```
+### AABB Collision
 
-### Collision Sfera-Sfera
-Due sfere collidono se la distanza tra i centri è minore della somma dei raggi:
+Two bounding boxes collide if they overlap on all three axes:
+
 ```
-collisione = distanza(centroA, centroB) < raggioA + raggioB
+collision = (A.min.x ≤ B.max.x && A.max.x ≥ B.min.x) &&
+            (A.min.y ≤ B.max.y && A.max.y ≥ B.min.y) &&
+            (A.min.z ≤ B.max.z && A.max.z ≥ B.min.z)
+
 ```
 
-## Debug Visivo
+### Sphere-Sphere Collision
 
-Il progetto utilizza estensivamente i **Gizmos** di Unity per la visualizzazione:
+Two spheres collide if the distance between centers is less than the sum of their radii:
 
-- `Gizmos.DrawCube()` / `Gizmos.DrawWireCube()` - Bounding box
-- `Gizmos.DrawSphere()` / `Gizmos.DrawWireSphere()` - Sfere
-- `Gizmos.DrawLine()` - Linee e distanze
-- Feedback cromatico: **verde** = nessuna collisione, **rosso** = collisione
+```
+collision = distance(centerA, centerB) < radiusA + radiusB
 
-## Come Utilizzare
+```
 
-1. Apri il progetto in Unity
-2. Carica la scena `SampleScene`
-3. Seleziona gli oggetti nella scena per vedere i parametri nell'Inspector
-4. Premi Play e osserva i Gizmos nella vista Scene
-5. Modifica i parametri in tempo reale per sperimentare
+## Visual Debugging
 
-## Obiettivi Didattici
+The project extensively uses Unity **Gizmos** for visualization:
 
-- Comprendere come funziona la collision detection a livello matematico
-- Operazioni vettoriali e la loro interpretazione geometrica
-- Calcoli di distanza e magnitudine nello spazio 3D
-- Differenze tra approcci AABB e sferico
-- Tecniche di debug visivo per algoritmi spaziali
+* `Gizmos.DrawCube()` / `Gizmos.DrawWireCube()` - Bounding boxes
+* `Gizmos.DrawSphere()` / `Gizmos.DrawWireSphere()` - Spheres
+* `Gizmos.DrawLine()` - Lines and distances
+* Color feedback: **green** = no collision, **red** = collision
 
-## Autore
+## How to Use
 
-Progetto creato come esercizio didattico per il corso Epicode.
+1. Open the project in Unity
+2. Load `SampleScene`
+3. Select objects in the scene to view parameters in the Inspector
+4. Press Play and observe the Gizmos in the Scene view
+5. Modify parameters in real-time to experiment
 
-## Licenza
+## Learning Objectives
 
-Questo progetto è destinato esclusivamente a scopi educativi.
+* Understand how collision detection works mathematically
+* Vector operations and their geometric interpretation
+* Distance and magnitude calculations in 3D space
+* Differences between AABB and spherical approaches
+* Visual debugging techniques for spatial algorithms
+
+## Author
+
+Project created as an educational exercise for the Epicode course.
+
+## License
+
+This project is intended for educational purposes only.
+
+---
+
+
