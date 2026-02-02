@@ -96,7 +96,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 4e9ba2fee5adb51459baa562e634f815, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -163,15 +163,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 13800593}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef42882ee8ece334aac8d63d8861bdf1, type: 3}
+  m_Script: {fileID: 11500000, guid: cc243a5e0fca10445aa7c68c49709161, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sphereRadius: 100
-  targetPoint: {fileID: 1574761506}
-  safeColor: {r: 0, g: 1, b: 0, a: 1}
-  hitColor: {r: 1, g: 0, b: 0, a: 1}
-  isInside: 0
-  currentDistance: 0
+  a_puntoA: {x: -24, y: 5, z: 0}
+  a_puntoB: {x: 1, y: 10, z: 0}
+  b_puntoA: {x: 0, y: 10, z: 16.36}
+  b_puntoB: {x: 2, y: 20, z: 0}
 --- !u!1 &579224035
 GameObject:
   m_ObjectHideFlags: 0
@@ -429,7 +427,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 100
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -437,7 +435,7 @@ Camera:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_RenderingPath: -1
+  m_RenderingPath: 0
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
