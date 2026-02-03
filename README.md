@@ -1,130 +1,83 @@
-# Unity Math Lab
+# Math for Unity: Applied Formulas & Concepts
 
-An educational laboratory designed to master fundamental 3D math concepts in Unity using interactive scripts and visual debugging techniques.
+This repository acts as a practical interactive guide to the essential mathematics behind game development in Unity. It translates abstract mathematical formulas into visual, playable C# examples.
 
-## Overview
-
-This project was created as an educational resource to understand the mathematics behind game development, specifically focusing on **collision detection** and vector operations.
-
-## Requirements
-
-* **Unity**: 2022.3.62f3 (LTS) or higher
-* **Language**: C#
-
-## Project Structure
-
-```
-Assets/
-├── Scripts/
-│   ├── Bounding Box/       # Scripts for AABB collision detection
-│   └── Bounding Spheres/   # Scripts for spherical collision detection
-└── Scenes/
-    └── SampleScene.unity   # Demo scene
-
-```
-
-## Mathematical Concepts
-
-### Bounding Box (AABB)
-
-The `Bounding Box` folder contains 5 scripts implementing collision detection via **Axis-Aligned Bounding Boxes**:
-
-| Script | Description |
-| --- | --- |
-| `BoundingBox3D.cs` | Calculates 3D bounding box properties (center, size) |
-| `BoundingBox3DCollision.cs` | Implements AABB collision detection using Min/Max comparison |
-| `IntervalMinMax.cs` | Checks if a point is contained within a 3D volume |
-| `IntervalOverlap.cs` | Detects 1D interval overlap and calculates intersection |
-| `SimpleCollision.cs` | Wrapper using Unity's `Bounds.Intersects()` |
-
-**Key Concepts:**
-
-* Vector arithmetic (addition, subtraction)
-* Min/Max calculation
-* Separating Axis Theorem (SAT)
-* Interval overlap logic
-
-### Bounding Spheres
-
-The `Bounding Spheres` folder contains 5 scripts for sphere-based collision detection:
-
-| Script | Description |
-| --- | --- |
-| `Sphere.cs` | Calculates distance between two points |
-| `DistanceBetweenTwoPositions.cs` | Demonstrates distance calculation (manual vs. Unity) |
-| `FindRadius.cs` | Calculates sphere radius from center and surface points |
-| `IsInsideOutside.cs` | Checks if a point is inside or outside a sphere |
-| `SphereVSSphere.cs` | Template for sphere-sphere collision |
-
-**Key Concepts:**
-
-* 3D Distance Formula (Euclidean distance)
-* Pythagorean Theorem extended to 3 dimensions
-* Vector Magnitude calculation
-* Point-in-sphere test
-
-## Mathematical Formulas
-
-### Distance between two points
-
-```
-d = √[(x₂-x₁)² + (y₂-y₁)² + (z₂-z₁)²]
-
-```
-
-### AABB Collision
-
-Two bounding boxes collide if they overlap on all three axes:
-
-```
-collision = (A.min.x ≤ B.max.x && A.max.x ≥ B.min.x) &&
-            (A.min.y ≤ B.max.y && A.max.y ≥ B.min.y) &&
-            (A.min.z ≤ B.max.z && A.max.z ≥ B.min.z)
-
-```
-
-### Sphere-Sphere Collision
-
-Two spheres collide if the distance between centers is less than the sum of their radii:
-
-```
-collision = distance(centerA, centerB) < radiusA + radiusB
-
-```
-
-## Visual Debugging
-
-The project extensively uses Unity **Gizmos** for visualization:
-
-* `Gizmos.DrawCube()` / `Gizmos.DrawWireCube()` - Bounding boxes
-* `Gizmos.DrawSphere()` / `Gizmos.DrawWireSphere()` - Spheres
-* `Gizmos.DrawLine()` - Lines and distances
-* Color feedback: **green** = no collision, **red** = collision
-
-## How to Use
-
-1. Open the project in Unity
-2. Load `SampleScene`
-3. Select objects in the scene to view parameters in the Inspector
-4. Press Play and observe the Gizmos in the Scene view
-5. Modify parameters in real-time to experiment
-
-## Learning Objectives
-
-* Understand how collision detection works mathematically
-* Vector operations and their geometric interpretation
-* Distance and magnitude calculations in 3D space
-* Differences between AABB and spherical approaches
-* Visual debugging techniques for spatial algorithms
-
-## Author
-
-Project created as an educational exercise for the Epicode course.
-
-## License
-
-This project is intended for educational purposes only.
+The goal is to move beyond theory and show **how** math is used to solve common gameplay problems like movement, targeting, physics reflections, and collision detection.
 
 ---
 
+## Project Overview
 
+The project is divided into key modules, each focusing on a specific mathematical pillar described in the *Math for Unity* curriculum.
+
+### 1. Foundations & Optimization
+
+Understanding space and the trade-offs between precision and performance.
+
+* **Coordinate Systems:** Visualizing Cartesian 3D space (X, Y, Z).
+* **Bounding Boxes (AABB):** Demonstrating the "Pizza Box" analogy. How to sacrifice precision for speed using simple geometric shapes for collision detection.
+
+### 2. Distances & Proximity
+
+* **Pythagorean Theorem:** Calculating distances between objects manually vs. using `Vector3.Distance`.
+* **Bounding Spheres:** Implementing simple collision checks using center points and radii .
+
+---
+
+## Core Mechanics
+
+### 3. Vector Algebra
+
+The engine of movement. This module demonstrates:
+
+* **Scaling:** Modifying magnitude (speed) without changing direction.
+* **Normalization:** Creating Unit Vectors (length = 1) for pure direction.
+* **Vector Addition:** Combining forces (e.g., `PlayerVelocity + WindForce`).
+
+### 4. Dot Product & Cross Product (The Toolkit)
+
+A deep dive into the two most critical operations for game logic.
+
+| Operation | Output | Key Question | Applications in Repo |
+| --- | --- | --- | --- |
+| **Dot Product**  | Scalar (Number) | *"Are we aligned?"* | FOV detection ("Is the player looking at me?"), Vector Projections. |
+| **Cross Product**  | Vector | *"What is perpendicular?"* | Calculating surface Normals, building local axis frames. |
+
+---
+
+### 5. 2D Planes in 3D Space
+
+Handling interactions with walls, floors, and surfaces.
+
+* **Plane Equation:** Visualizing .
+* **Plane Construction:**
+* Deriving a plane Normal from **3 Points** (Triangle) using the Cross Product.
+
+* **Interactions:**
+* **Ray Casting:** Using the Dot Product denominator to calculate Line-Plane intersection.
+* **Shadow Projection:** Flattening a 3D object onto a plane.
+* **Specular Reflection:** The "Bounce" formula.
+
+---
+
+## How to Use
+
+1. **Clone the Repository:**
+```bash
+git clone https://github.com/Mike014/Math_for_Unity.git
+
+```
+
+2. **Open in Unity:**
+* Load the project in Unity [Version 2022.3+ Recommended].
+
+3. **Enable Gizmos:**
+* Most visualizations rely on `OnDrawGizmos`. Ensure **Gizmos** are toggled **ON** in the Scene View to see the vectors, rays, and planes.
+
+4. **Play & Modify:**
+* Open the scenes in the `Scenes/` folder.
+* Move the GameObjects labeled `PointA`, `PointB`, or `Player` to see calculations update in real-time.
+
+## 📝 License
+
+This project is for educational purposes. Feel free to use the code snippets in your own projects.
